@@ -1,17 +1,16 @@
 package com.nodeajva.ch3schedule.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
 
@@ -38,8 +37,8 @@ public class Comment {
     // 생성자
     public Comment(String content, Schedule schedule, User user) {
         this.content = content;
-        this.schedule = schedule;
         this.user = user;
+        this.schedule = schedule;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
