@@ -13,6 +13,8 @@ import com.nodeajva.ch3schedule.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,12 @@ public class ScheduleService {
                 .orElseThrow(() -> new ScheduleNotFoundException());
 
         return ScheduleResponse.from(schedules);
+    }
+
+    //페이징
+    public Page<ScheduleResponse> findAllPaged(Pageable pageable) {
+        Page<Schedule> schedules = scheduleRepository.findAll(pageable);
+        return schedules.map(ScheduleResponse::from);
     }
 
 
