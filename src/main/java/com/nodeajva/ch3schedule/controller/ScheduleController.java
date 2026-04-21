@@ -6,8 +6,11 @@ import com.nodeajva.ch3schedule.dto.response.ScheduleResponse;
 import com.nodeajva.ch3schedule.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -38,6 +41,12 @@ public class ScheduleController {
     public List<ScheduleResponse> findAll(){
 
         return scheduleService.findAll();
+    }
+
+    //페이징 조회
+    @GetMapping("/Paged")
+    public Page<ScheduleResponse> findAllPaged(Pageable pageable) {
+        return scheduleService.findAllPaged(pageable);
     }
 
     //유저 일정들 조회
