@@ -87,17 +87,18 @@ public class ScheduleService {
 
 
 
-    //최신 글 조회
-    public List<ScheduleResponse> findRecent(){
+    // 최신순 조회
+    public List<ScheduleResponse> findRecent() {
         List<Schedule> schedules = scheduleRepository.findAllByOrderByCreatedAtDesc();
 
         List<ScheduleResponse> responses = new ArrayList<>();
-
-        for (Schedule schedule: schedules){
+        for (Schedule schedule : schedules) {
             responses.add(ScheduleResponse.from(schedule));
         }
+
         return responses;
     }
+
 
 
 
