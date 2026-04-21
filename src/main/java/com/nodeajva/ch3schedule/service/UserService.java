@@ -22,13 +22,13 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     //회원가입
-    public SignupResponse signup(SignupRequest request) {
+    public SignupResponse signup(SignupRequest request){
 
 
-        if (!passwordEncoder.matches(login.password(),())) {
+
+        if (userRepository.findByLoginId(request.loginId()).isPresent()) {
             throw new DuplicateLoginIdException();
         }
-
 
 
 
@@ -52,7 +52,7 @@ public class UserService {
         User user = userRepository.findByLoginId(login.loginId())
                 .orElseThrow(() -> new InvalidPasswordException());
 
-        if (!user.getPassword().equals(login.password())) {
+        if (!passwordEncoder.matches(login.password(), user.getPassword())) {
             throw new InvalidPasswordException();
         }
         return LoginResponse.from(user);
