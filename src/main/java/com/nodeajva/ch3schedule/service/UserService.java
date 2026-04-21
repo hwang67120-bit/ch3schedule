@@ -1,7 +1,7 @@
 package com.nodeajva.ch3schedule.service;
 
-import com.nodeajva.ch3schedule.Entity.User;
-import com.nodeajva.ch3schedule.config.PasswoedEncoder;
+import com.nodeajva.ch3schedule.entity.User;
+import com.nodeajva.ch3schedule.config.PasswordEncoder;
 import com.nodeajva.ch3schedule.dto.request.LoginRequest;
 import com.nodeajva.ch3schedule.dto.request.SignupRequest;
 import com.nodeajva.ch3schedule.dto.response.LoginResponse;
@@ -12,25 +12,27 @@ import com.nodeajva.ch3schedule.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswoedEncoder passwoedEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     //회원가입
-    public SignupResponse signup(SignupRequest request){
+    public SignupResponse signup(SignupRequest request) {
 
 
-
-        if (userRepository.findByLoginId(request.loginId()).isPresent()) {
+        if (!passwordEncoder.matches(login.password(),())) {
             throw new DuplicateLoginIdException();
         }
 
-        String encodedPassword = passwoedEncoder.encode(request.password());
+
+
+
+        String encodedPassword = passwordEncoder.encode(request.password());
 
         User user = new User(
                 request.loginId(),
