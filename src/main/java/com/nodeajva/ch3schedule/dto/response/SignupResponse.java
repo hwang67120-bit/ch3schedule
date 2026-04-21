@@ -1,6 +1,6 @@
 package com.nodeajva.ch3schedule.dto.response;
 
-import com.nodeajva.ch3schedule.Entity.User;
+import com.nodeajva.ch3schedule.entity.User;
 
 
 import lombok.Builder;
@@ -14,7 +14,7 @@ public class SignupResponse{
     private String loginId;
     private String userName;
     private String email;
-    private LocalDateTime createdAt;
+
 
 
     public static SignupResponse from(User user) {
@@ -22,7 +22,6 @@ public class SignupResponse{
                 .id(user.getId())
                 .loginId(user.getLoginId())
                 .email(user.getEmail())
-                .createdAt(user.getCreatedAt())
                 .userName(user.getUserName())
                 .build();
     }

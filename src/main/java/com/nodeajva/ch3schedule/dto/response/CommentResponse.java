@@ -1,7 +1,6 @@
 package com.nodeajva.ch3schedule.dto.response;
 
-import com.nodeajva.ch3schedule.Entity.Comment;
-import com.nodeajva.ch3schedule.Entity.User;
+import com.nodeajva.ch3schedule.entity.Comment;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +11,8 @@ public record CommentResponse(
         Long scheduleId,
         String scheduleTitle,
         Long userId,
-        String userName,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt
+        String userName
+
 ) {
 
 
@@ -25,9 +23,8 @@ public record CommentResponse(
                 comment.getSchedule().getId(),
                 comment.getSchedule().getTitle(),
                 comment.getUser().getId(),
-                comment.getUser().getUserName(),
-                comment.getCreatedAt(),
-                comment.getUpdatedAt()
+                comment.getUser().getUserName()
+
         );
     }
 }
