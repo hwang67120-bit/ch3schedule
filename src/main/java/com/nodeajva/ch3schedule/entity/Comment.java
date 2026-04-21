@@ -1,4 +1,4 @@
-package com.nodeajva.ch3schedule.Entity;
+package com.nodeajva.ch3schedule.entity;
 
 import jakarta.persistence.*;
 
@@ -29,23 +29,18 @@ public class Comment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     // 생성자
     public Comment(String content, Schedule schedule, User user) {
         this.content = content;
         this.user = user;
         this.schedule = schedule;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+
     }
 
     // update 메서드
     public void update(String content) {
         this.content = content;
-        this.updatedAt = LocalDateTime.now();
+
     }
 }
