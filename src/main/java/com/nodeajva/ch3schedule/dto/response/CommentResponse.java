@@ -1,5 +1,8 @@
 package com.nodeajva.ch3schedule.dto.response;
 
+import com.nodeajva.ch3schedule.Entity.Comment;
+import com.nodeajva.ch3schedule.Entity.User;
+
 import java.time.LocalDateTime;
 
 public record CommentResponse(
@@ -13,4 +16,18 @@ public record CommentResponse(
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {
+
+
+    public static CommentResponse from(Comment comment) {
+        return new CommentResponse(
+                comment.getId(),
+                comment.getContent(),
+                comment.getSchedule().getId(),
+                comment.getSchedule().getTitle(),
+                comment.getUser().getId(),
+                comment.getUser().getUserName(),
+                comment.getCreatedAt(),
+                comment.getUpdatedAt()
+        );
+    }
 }
