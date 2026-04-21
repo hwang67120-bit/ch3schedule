@@ -11,7 +11,7 @@ import com.nodeajva.ch3schedule.exception.InvalidPasswordException;
 import com.nodeajva.ch3schedule.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -22,6 +22,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     //회원가입
+    @Transactional
     public SignupResponse signup(SignupRequest request){
 
 
@@ -47,6 +48,7 @@ public class UserService {
     }
 
     //로그인
+    @Transactional
     public LoginResponse login(LoginRequest login ){
 
         User user = userRepository.findByLoginId(login.loginId())

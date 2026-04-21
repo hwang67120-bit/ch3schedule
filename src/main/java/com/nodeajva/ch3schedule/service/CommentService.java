@@ -1,8 +1,8 @@
 package com.nodeajva.ch3schedule.service;
 
-import com.nodeajva.ch3schedule.Entity.Comment;
-import com.nodeajva.ch3schedule.Entity.Schedule;
-import com.nodeajva.ch3schedule.Entity.User;
+import com.nodeajva.ch3schedule.entity.Comment;
+import com.nodeajva.ch3schedule.entity.Schedule;
+import com.nodeajva.ch3schedule.entity.User;
 import com.nodeajva.ch3schedule.dto.request.CommentRequest;
 import com.nodeajva.ch3schedule.dto.response.CommentResponse;
 import com.nodeajva.ch3schedule.exception.CommentNotFoundException;
@@ -15,17 +15,19 @@ import lombok.RequiredArgsConstructor;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CommentService {
 
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
-    private final CommentRepository CommentRepository;
+    private final CommentRepository commentRepository;
 
     //등록
     public CommentResponse save(CommentRequest request) {
@@ -42,7 +44,7 @@ public class CommentService {
                 user
         );
 
-        Comment saved = CommentRepository.save(comment);
+        Comment saved = commentRepository.save(comment);
 
         CommentResponse response = CommentResponse.from(saved);
 
@@ -52,7 +54,7 @@ public class CommentService {
     //댓글 조회
     public List<CommentResponse> findByScheduleId(Long scheduleId){
 
-        List<Comment> comments = CommentRepository.findByScheduleId(scheduleId);
+        List<Comment> comments = commentRepository.findByScheduleId(scheduleId);
 
         List<CommentResponse> responses = new ArrayList<>();
         for (Comment comment: comments){
@@ -65,21 +67,22 @@ public class CommentService {
 
     //수정
     public CommentResponse update(Long id, CommentRequest request){
-        Comment comment = CommentRepository.findById(id)
+        Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new CommentNotFoundException());
 
         comment.update(request.content());
 
-        Comment saved = CommentRepository.save(comment);
+        Comment saved = commentRepository.save(comment);
         return CommentResponse.from(saved);
 
     }
 
     //삭제
+    @Transactional
     public void delete(Long id){
-        Comment comment = CommentRepository.findById(id)
+        Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new CommentNotFoundException());
 
-        CommentRepository.delete(comment);
+        commentRepository.delete(comment);
     }
 }

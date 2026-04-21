@@ -1,7 +1,7 @@
 package com.nodeajva.ch3schedule.service;
 
-import com.nodeajva.ch3schedule.Entity.Schedule;
-import com.nodeajva.ch3schedule.Entity.User;
+import com.nodeajva.ch3schedule.entity.Schedule;
+import com.nodeajva.ch3schedule.entity.User;
 import com.nodeajva.ch3schedule.dto.request.ScheduleRequest;
 
 import com.nodeajva.ch3schedule.dto.request.ScheduleUpdateRequest;
@@ -16,11 +16,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ScheduleService {
 
     private final UserRepository userRepository;
@@ -29,6 +32,7 @@ public class ScheduleService {
 
 
     //등록
+    @Transactional
     public ScheduleResponse save(ScheduleRequest request){
 
 
@@ -52,6 +56,7 @@ public class ScheduleService {
     }
 
     //단건 조회
+
     public ScheduleResponse findById(Long id){
         Schedule schedules = scheduleRepository.findById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException());
@@ -129,6 +134,7 @@ public class ScheduleService {
     }
 
     //삭제
+    @Transactional
     public void delete(Long id) {
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException());
