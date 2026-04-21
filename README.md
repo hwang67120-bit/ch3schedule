@@ -385,33 +385,26 @@
 
 ## 프로젝트 구조
 
-\`\`\`
-src/main/java/com/nodeajva/ch3schedule/
-├── Entity/
-│   ├── BaseEntity.java
-│   ├── User.java
-│   ├── Schedule.java
-│   └── Comment.java
-├── controller/
-│   ├── UserController.java
-│   ├── ScheduleController.java
-│   └── CommentController.java
-├── service/
-│   ├── UserService.java
-│   ├── ScheduleService.java
-│   └── CommentService.java
-├── repository/
-│   ├── UserRepository.java
-│   ├── ScheduleRepository.java
-│   └── CommentRepository.java
-├── dto/
-│   ├── request/
-│   └── response/
-├── exception/
-└── config/
-    └── PasswordEncoder.java
-\`\`\`
-    
+| 패키지 | 클래스 | 설명 |
+|--------|--------|------|
+| Entity | BaseEntity | 공통 시간 필드 (JPA Auditing) |
+| | User | 사용자 엔티티 |
+| | Schedule | 일정 엔티티 |
+| | Comment | 댓글 엔티티 |
+| controller | UserController | 사용자 API |
+| | ScheduleController | 일정 API |
+| | CommentController | 댓글 API |
+| service | UserService | 사용자 비즈니스 로직 |
+| | ScheduleService | 일정 비즈니스 로직 |
+| | CommentService | 댓글 비즈니스 로직 |
+| repository | UserRepository | 사용자 DB 접근 |
+| | ScheduleRepository | 일정 DB 접근 |
+| | CommentRepository | 댓글 DB 접근 |
+| dto | request/ | 요청 DTO |
+| | response/ | 응답 DTO |
+| exception | - | 커스텀 예외 |
+| config | PasswordEncoder | 비밀번호 암호화 |
+
 ## 주요 클래스 설명
 
 ### Entity
