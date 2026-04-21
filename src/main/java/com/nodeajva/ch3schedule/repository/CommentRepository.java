@@ -3,5 +3,8 @@ package com.nodeajva.ch3schedule.repository;
 import com.nodeajva.ch3schedule.Entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CommentReoisitory extends JpaRepository<Comment, Long> {
+import java.util.List;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+    List<Comment> findByScheduleId(Long scheduleId);
 }
