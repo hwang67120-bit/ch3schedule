@@ -382,7 +382,6 @@
     - `size`: 페이지 크기
     - `sort`: 정렬 기준
 
-
 src/main/java/com/nodeajva/ch3schedule/
 ├── Entity/
 │   ├── BaseEntity.java (공통 시간 필드 - JPA Auditing)
@@ -407,6 +406,7 @@ src/main/java/com/nodeajva/ch3schedule/
 ├── exception/ (커스텀 예외)
 └── config/
     └── PasswordEncoder.java (비밀번호 암호화 설정)
+
     
 ## 주요 클래스 설명
 
