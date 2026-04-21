@@ -37,8 +37,8 @@ public class UserService {
         User user = new User(
                 request.loginId(),
                 encodedPassword,
-                request.email(),
-                request.userName()
+                request.userName(),
+                request.email()
         );
 
         User saved = userRepository.save(user);
