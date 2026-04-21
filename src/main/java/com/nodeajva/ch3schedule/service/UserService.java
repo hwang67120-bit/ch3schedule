@@ -1,6 +1,7 @@
 package com.nodeajva.ch3schedule.service;
 
 import com.nodeajva.ch3schedule.Entity.User;
+import com.nodeajva.ch3schedule.config.PasswoedEncoder;
 import com.nodeajva.ch3schedule.dto.request.LoginRequest;
 import com.nodeajva.ch3schedule.dto.request.SignupRequest;
 import com.nodeajva.ch3schedule.dto.response.LoginResponse;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final PasswoedEncoder passwoedEncoder;
 
     //회원가입
     public SignupResponse signup(SignupRequest request){
@@ -29,9 +30,11 @@ public class UserService {
             throw new DuplicateLoginIdException();
         }
 
+        String encodedPassword = passwoedEncoder.encode(request.password());
+
         User user = new User(
                 request.loginId(),
-                request.password(),
+                encodedPassword,
                 request.email(),
                 request.userName()
         );
