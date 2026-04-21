@@ -382,31 +382,35 @@
     - `size`: 페이지 크기
     - `sort`: 정렬 기준
 
+
+## 프로젝트 구조
+
+\`\`\`
 src/main/java/com/nodeajva/ch3schedule/
 ├── Entity/
-│   ├── BaseEntity.java (공통 시간 필드 - JPA Auditing)
-│   ├── User.java (사용자 엔티티)
-│   ├── Schedule.java (일정 엔티티)
-│   └── Comment.java (댓글 엔티티)
+│   ├── BaseEntity.java
+│   ├── User.java
+│   ├── Schedule.java
+│   └── Comment.java
 ├── controller/
-│   ├── UserController.java (사용자 API)
-│   ├── ScheduleController.java (일정 API)
-│   └── CommentController.java (댓글 API)
+│   ├── UserController.java
+│   ├── ScheduleController.java
+│   └── CommentController.java
 ├── service/
-│   ├── UserService.java (사용자 비즈니스 로직)
-│   ├── ScheduleService.java (일정 비즈니스 로직)
-│   └── CommentService.java (댓글 비즈니스 로직)
+│   ├── UserService.java
+│   ├── ScheduleService.java
+│   └── CommentService.java
 ├── repository/
-│   ├── UserRepository.java (사용자 DB 접근)
-│   ├── ScheduleRepository.java (일정 DB 접근)
-│   └── CommentRepository.java (댓글 DB 접근)
+│   ├── UserRepository.java
+│   ├── ScheduleRepository.java
+│   └── CommentRepository.java
 ├── dto/
-│   ├── request/ (요청 DTO)
-│   └── response/ (응답 DTO)
-├── exception/ (커스텀 예외)
+│   ├── request/
+│   └── response/
+├── exception/
 └── config/
-    └── PasswordEncoder.java (비밀번호 암호화 설정)
-
+    └── PasswordEncoder.java
+\`\`\`
     
 ## 주요 클래스 설명
 
