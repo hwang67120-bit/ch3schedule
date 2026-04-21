@@ -381,3 +381,49 @@
     - `page`: 페이지 번호 (0부터 시작)
     - `size`: 페이지 크기
     - `sort`: 정렬 기준
+
+
+src/main/java/com/nodeajva/ch3schedule/
+├── Entity/
+│   ├── BaseEntity.java      # 공통 시간 필드 (JPA Auditing)
+│   ├── User.java            # 사용자 엔티티
+│   ├── Schedule.java        # 일정 엔티티
+│   └── Comment.java         # 댓글 엔티티
+├── controller/
+│   ├── UserController.java       # 사용자 API
+│   ├── ScheduleController.java   # 일정 API
+│   └── CommentController.java    # 댓글 API
+├── service/
+│   ├── UserService.java          # 사용자 비즈니스 로직
+│   ├── ScheduleService.java      # 일정 비즈니스 로직
+│   └── CommentService.java       # 댓글 비즈니스 로직
+├── repository/
+│   ├── UserRepository.java       # 사용자 DB 접근
+│   ├── ScheduleRepository.java   # 일정 DB 접근
+│   └── CommentRepository.java    # 댓글 DB 접근
+├── dto/
+│   ├── request/                  # 요청 DTO
+│   └── response/                 # 응답 DTO
+├── exception/                    # 커스텀 예외
+└── config/
+└── PasswordEncoder.java      # 비밀번호 암호화 설정
+
+## 주요 클래스 설명
+
+### Entity
+- **BaseEntity**: JPA Auditing으로 `createdAt`, `updatedAt` 자동 관리
+- **User**: 사용자 정보 (로그인ID, 비밀번호, 이름, 이메일)
+- **Schedule**: 일정 정보 (제목, 내용, 작성자)
+- **Comment**: 댓글 정보 (내용, 일정, 작성자)
+
+### Service
+- **@Transactional(readOnly = true)**: 클래스 기본값 (조회 최적화)
+- **@Transactional**: 변경 작업 (INSERT/UPDATE/DELETE)
+- BCrypt로 비밀번호 암호화
+
+### Controller
+- **@RestController**: REST API 컨트롤러
+- **@Valid**: 요청 검증
+- **@PathVariable**, **@RequestBody**: 파라미터 매핑
+
+
