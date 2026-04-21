@@ -1,8 +1,5 @@
 ## 일정 API
 
-## **ERD**
-
-  **링크:** https://www.erdcloud.com/d/PjLKZtNY84gpkD7fp
 
 # 일정 관리 API 명세서
 
