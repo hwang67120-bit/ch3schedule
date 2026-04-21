@@ -71,15 +71,13 @@ public class ScheduleService {
     }
 
 
-    //전체 조회
-    public List<ScheduleResponse> findAll(){
+    // 전체 조회 (ID 순)
+    public List<ScheduleResponse> findAll() {
         List<Schedule> schedules = scheduleRepository.findAll();
 
         List<ScheduleResponse> responses = new ArrayList<>();
-
-        for (Schedule schedule: schedules){
-             ScheduleResponse response =  ScheduleResponse.from(schedule);
-             responses.add(response);
+        for (Schedule schedule : schedules) {
+            responses.add(ScheduleResponse.from(schedule));
         }
 
         return responses;
