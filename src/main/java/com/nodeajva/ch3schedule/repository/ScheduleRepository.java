@@ -1,6 +1,6 @@
 package com.nodeajva.ch3schedule.repository;
 
-import com.nodeajva.ch3schedule.Entity.Schedule;
+import com.nodeajva.ch3schedule.entity.Schedule;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
