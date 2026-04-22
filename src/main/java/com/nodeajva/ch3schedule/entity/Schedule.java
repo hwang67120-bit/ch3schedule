@@ -1,17 +1,14 @@
 package com.nodeajva.ch3schedule.entity;
 
 import jakarta.persistence.*;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "schedules")
 @Getter
 @NoArgsConstructor
-public class Schedule extends BaseEntity{
+public class Schedule extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +22,6 @@ public class Schedule extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-
 
 
     public Schedule(String title, String content, User user) {
