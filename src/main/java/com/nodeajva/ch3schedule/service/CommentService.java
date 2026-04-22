@@ -30,6 +30,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     //등록
+    @Transactional
     public CommentResponse save(CommentRequest request) {
 
         Schedule schedule = scheduleRepository.findById(request.scheduleId())
@@ -66,6 +67,7 @@ public class CommentService {
     }
 
     //수정
+    @Transactional
     public CommentResponse update(Long id, CommentRequest request){
         Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new CommentNotFoundException());

@@ -114,6 +114,7 @@ public class ScheduleService {
     }
 
     //수정
+    @Transactional
     public ScheduleResponse update(Long id, ScheduleUpdateRequest request){
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(()->new ScheduleNotFoundException());
