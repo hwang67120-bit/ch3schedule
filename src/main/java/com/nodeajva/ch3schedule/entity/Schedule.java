@@ -1,4 +1,4 @@
-package com.nodeajva.ch3schedule.Entity;
+package com.nodeajva.ch3schedule.entity;
 
 import jakarta.persistence.*;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "schedules")
 @Getter
 @NoArgsConstructor
-public class Schedule {
+public class Schedule extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,24 +26,20 @@ public class Schedule {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
 
-    private LocalDateTime updatedAt;
 
 
     public Schedule(String title, String content, User user) {
         this.title = title;
         this.content = content;
         this.user = user;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+
     }
 
 
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
-        this.updatedAt = LocalDateTime.now();
+
     }
 }
