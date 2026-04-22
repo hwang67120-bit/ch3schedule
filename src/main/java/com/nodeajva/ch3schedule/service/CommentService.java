@@ -92,13 +92,9 @@ public class CommentService {
      */
     @Transactional
     public CommentResponse update(Long id, CommentRequest request){
-        Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new CommentNotFoundException());
+        Comment comment = commentRepository.load(id);
 
-        comment.update(request.content());
-
-        Comment saved = commentRepository.save(comment);
-        return CommentResponse.from(saved);
+        return CommentResponse.from(comment);
 
     }
 
@@ -111,8 +107,8 @@ public class CommentService {
      */
     @Transactional
     public void delete(Long id){
-        Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new CommentNotFoundException());
+        Comment comment = commentRepository.load(id);
+
 
         commentRepository.delete(comment);
     }
