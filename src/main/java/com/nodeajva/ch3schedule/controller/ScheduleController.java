@@ -21,7 +21,12 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    //등록
+    /**
+     * 일정 등록 API
+     *
+     * @param request 일정 등록 요청 (title, content, userId)
+     * @return 생성된 일정 정보
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ScheduleResponse save(@Valid @RequestBody ScheduleRequest request){
@@ -29,40 +34,68 @@ public class ScheduleController {
         return scheduleService.save(request);
     }
 
-    //단건조회
-
+    /**
+     * 일정 단건 조회 API
+     *
+     * @param id 일정 ID
+     * @return 일정 정보
+     */
     @GetMapping("/{id}")
     public ScheduleResponse findById (@PathVariable Long id){
         return scheduleService.findById(id);
     }
 
-    // 전체조회
+    /**
+     * 일정 전체 조회 API
+     *
+     * @return 일정 목록
+     */
     @GetMapping
     public List<ScheduleResponse> findAll(){
 
         return scheduleService.findAll();
     }
 
-    //페이징 조회
+    /**
+     * 일정 페이징 조회 API
+     *
+     * @param pageable 페이징 정보 (page, size, sort)
+     * @return 페이징된 일정 목록
+     */
     @GetMapping("/Paged")
     public Page<ScheduleResponse> findAllPaged(Pageable pageable) {
         return scheduleService.findAllPaged(pageable);
     }
 
-    //유저 일정들 조회
+    /**
+     * 특정 사용자 일정 조회 API
+     *
+     * @param userId 사용자 ID
+     * @return 사용자의 일정 목록
+     */
     @GetMapping("/user/{userId}")
     public List<ScheduleResponse> findByUserId(@PathVariable Long userId) {
 
         return scheduleService.findByUserId(userId);
     }
 
-    //최신 일정조회
+    /**
+     * 최신 일정 조회 API
+     *
+     * @return 최신순으로 정렬된 일정 목록
+     */
     @GetMapping("/recent")
     public List<ScheduleResponse> findRecent() {
         return scheduleService.findRecent();
     }
 
-    //수정
+    /**
+     * 일정 수정 API
+     *
+     * @param id 일정 ID
+     * @param request 일정 수정 요청 (title, content)
+     * @return 수정된 일정 정보
+     */
     @PutMapping("/{id}")
     public ScheduleResponse update(
             @Valid
@@ -71,7 +104,11 @@ public class ScheduleController {
         return scheduleService.update(id,request);
     }
 
-    //삭제
+    /**
+     * 일정 삭제 API
+     *
+     * @param id 일정 ID
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id){

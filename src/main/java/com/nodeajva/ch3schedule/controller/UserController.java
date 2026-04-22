@@ -17,15 +17,24 @@ public class UserController {
 
     private final UserService userService;
 
-    //회원가입
-    @PostMapping("/signup")
+    /**
+     * 회원가입 API
+     *
+     * @param request 회원가입 요청 (loginId, password, userName, email)
+     * @return 생성된 사용자 정보
+     */    @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public SignupResponse signup(@Valid @RequestBody SignupRequest request){
 
         return userService.signup(request);
     }
 
-    //로그인
+    /**
+     * 로그인 API
+     *
+     * @param request 로그인 요청 (loginId, password)
+     * @return 로그인 응답 (userId, loginId, userName)
+     */
     @PostMapping("/login")
     public LoginResponse login(@Valid @RequestBody LoginRequest request){
 

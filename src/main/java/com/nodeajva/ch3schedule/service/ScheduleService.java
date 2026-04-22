@@ -32,12 +32,17 @@ public class ScheduleService {
     private final CommentRepository commentRepository;
 
 
-    //등록
+    /**
+     * 일정 등록
+     * 새로운 일정을 생성합니다.
+     *
+     * @param request 일정 등록 요청 (title, content, userId)
+     * @return 생성된 일정 정보 (id, title, content, userId, userName, createdAt, updatedAt)
+     * @throws UserNotFoundException 존재하지 않는 사용자인 경우
+     */
     @Transactional
     public ScheduleResponse save(ScheduleRequest request){
 
-
-        //확인
         User user = userRepository.findById(request.userId())
                 .orElseThrow(() -> new UserNotFoundException());
 
@@ -47,17 +52,22 @@ public class ScheduleService {
                 user
 
         );
-        //저장
         Schedule saved = scheduleRepository.save(schedule);
 
-        //변환
+
         ScheduleResponse response = ScheduleResponse.from(saved);
 
         return response;
     }
 
-    //단건 조회
-
+    /**
+     * 일정 단건 조회
+     * ID로 특정 일정을 조회합니다.
+     *
+     * @param id 일정 ID
+     * @return 일정 정보 (id, title, content, userId, userName, createdAt, updatedAt)
+     * @throws ScheduleNotFoundException 존재하지 않는 일정인 경우
+     */
     public ScheduleResponse findById(Long id){
         Schedule schedules = scheduleRepository.findById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException());
@@ -65,14 +75,25 @@ public class ScheduleService {
         return ScheduleResponse.from(schedules);
     }
 
-    //페이징
+    /**
+     * 일정 페이징 조회
+     * 페이징 처리된 일정 목록을 조회합니다.
+     *
+     * @param pageable 페이징 정보 (page, size, sort)
+     * @return 페이징된 일정 목록
+     */
     public Page<ScheduleResponse> findAllPaged(Pageable pageable) {
         Page<Schedule> schedules = scheduleRepository.findAll(pageable);
         return schedules.map(ScheduleResponse::from);
     }
 
 
-    // 전체 조회 (ID 순)
+    /**
+     * 일정 전체 조회 (ID 순)
+     * 모든 일정을 ID 순서대로 조회합니다.
+     *
+     * @return 일정 목록 (id, title, content, userId, userName, createdAt, updatedAt)
+     */
     public List<ScheduleResponse> findAll() {
         List<Schedule> schedules = scheduleRepository.findAll();
 
@@ -86,7 +107,12 @@ public class ScheduleService {
 
 
 
-    // 최신순 조회
+    /**
+     * 일정 최신순 조회
+     * 모든 일정을 생성일 기준 최신순으로 조회합니다.
+     *
+     * @return 최신순으로 정렬된 일정 목록
+     */
     public List<ScheduleResponse> findRecent() {
         List<Schedule> schedules = scheduleRepository.findAllByOrderByCreatedAtDesc();
 
@@ -101,7 +127,13 @@ public class ScheduleService {
 
 
 
-    // 유저 글 전체 조회
+    /**
+     * 특정 사용자의 일정 전체 조회
+     * 특정 사용자가 작성한 모든 일정을 조회합니다.
+     *
+     * @param userid 사용자 ID
+     * @return 사용자의 일정 목록
+     */
     public List<ScheduleResponse> findByUserId(Long userid){
         List<Schedule> schedules = scheduleRepository.findByUserId(userid);
 
@@ -114,7 +146,15 @@ public class ScheduleService {
         return responses;
     }
 
-    //수정
+    /**
+     * 일정 수정
+     * 기존 일정의 제목과 내용을 수정합니다.
+     *
+     * @param id 일정 ID
+     * @param request 일정 수정 요청 (title, content)
+     * @return 수정된 일정 정보 (id, title, content, userId, userName, createdAt, updatedAt)
+     * @throws ScheduleNotFoundException 존재하지 않는 일정인 경우
+     */
     @Transactional
     public ScheduleResponse update(Long id, ScheduleUpdateRequest request){
         Schedule schedule = scheduleRepository.findById(id)
@@ -134,7 +174,13 @@ public class ScheduleService {
         return ScheduleResponse.from(saved);
     }
 
-    //삭제
+    /**
+     * 일정 삭제
+     * 일정과 관련된 모든 댓글을 함께 삭제합니다.
+     *
+     * @param id 일정 ID
+     * @throws ScheduleNotFoundException 존재하지 않는 일정인 경우
+     */
     @Transactional
     public void delete(Long id) {
         Schedule schedule = scheduleRepository.findById(id)

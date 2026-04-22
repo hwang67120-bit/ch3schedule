@@ -25,11 +25,20 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class CommentService {
 
+
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
     private final CommentRepository commentRepository;
 
-    //등록
+    /**
+     * 댓글 등록
+     * 특정 일정에 새로운 댓글을 작성합니다.
+     *
+     * @param request 댓글 등록 요청 (scheduleId, userId, content)
+     * @return 생성된 댓글 정보 (id, content, scheduleId, userId, userName, createdAt, updatedAt)
+     * @throws ScheduleNotFoundException 존재하지 않는 일정인 경우
+     * @throws UserNotFoundException 존재하지 않는 사용자인 경우
+     */
     @Transactional
     public CommentResponse save(CommentRequest request) {
 
@@ -52,7 +61,13 @@ public class CommentService {
         return response;
     }
 
-    //댓글 조회
+    /**
+     * 일정의 댓글 조회
+     * 특정 일정에 작성된 모든 댓글을 조회합니다.
+     *
+     * @param scheduleId 일정 ID
+     * @return 댓글 목록 (id, content, scheduleId, userId, userName, createdAt, updatedAt)
+     */
     public List<CommentResponse> findByScheduleId(Long scheduleId){
 
         List<Comment> comments = commentRepository.findByScheduleId(scheduleId);
@@ -66,7 +81,15 @@ public class CommentService {
 
     }
 
-    //수정
+    /**
+     * 댓글 수정
+     * 기존 댓글의 내용을 수정합니다.
+     *
+     * @param id 댓글 ID
+     * @param request 댓글 수정 요청 (scheduleId, userId, content)
+     * @return 수정된 댓글 정보 (id, content, scheduleId, userId, userName, createdAt, updatedAt)
+     * @throws CommentNotFoundException 존재하지 않는 댓글인 경우
+     */
     @Transactional
     public CommentResponse update(Long id, CommentRequest request){
         Comment comment = commentRepository.findById(id)
@@ -79,7 +102,13 @@ public class CommentService {
 
     }
 
-    //삭제
+    /**
+     * 댓글 삭제
+     * 특정 댓글을 삭제합니다.
+     *
+     * @param id 댓글 ID
+     * @throws CommentNotFoundException 존재하지 않는 댓글인 경우
+     */
     @Transactional
     public void delete(Long id){
         Comment comment = commentRepository.findById(id)

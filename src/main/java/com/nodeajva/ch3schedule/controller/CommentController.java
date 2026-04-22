@@ -16,15 +16,24 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    //등록
-    @PostMapping("/api/schedules/{scheduleId}/comments")
+    /**
+     * 댓글 등록 API
+     *
+     * @param request 댓글 등록 요청 (scheduleId, userId, content)
+     * @return 생성된 댓글 정보
+     */    @PostMapping("/api/schedules/{scheduleId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentResponse save(@Valid @RequestBody CommentRequest request){
 
         return commentService.save(request);
     }
 
-    //댓글조회
+    /**
+     * 일정의 댓글 조회 API
+     *
+     * @param scheduleId 일정 ID
+     * @return 댓글 목록
+     */
     @GetMapping("/api/schedules/{scheduleId}/comments")
     public List<CommentResponse> findByScheduleId(@PathVariable Long scheduleId){
 
@@ -32,7 +41,13 @@ public class CommentController {
 
     }
 
-    //수정
+    /**
+     * 댓글 수정 API
+     *
+     * @param id 댓글 ID
+     * @param request 댓글 수정 요청 (scheduleId, userId, content)
+     * @return 수정된 댓글 정보
+     */
     @PutMapping("/api/comments/{id}")
     public CommentResponse update(
             @Valid
@@ -42,7 +57,11 @@ public class CommentController {
         return commentService.update(id,request);
     }
 
-    //삭제
+    /**
+     * 댓글 삭제 API
+     *
+     * @param id 댓글 ID
+     */
     @DeleteMapping("/api/comments/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(
