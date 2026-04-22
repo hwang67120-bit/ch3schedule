@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comments")
 @RequiredArgsConstructor
 public class CommentController {
 
     private final CommentService commentService;
 
     //등록
-    @PostMapping
+    @PostMapping("/api/schedules/{scheduleId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentResponse save(@Valid @RequestBody CommentRequest request){
 
@@ -26,7 +25,7 @@ public class CommentController {
     }
 
     //댓글조회
-    @GetMapping("/{scheduleId}")
+    @GetMapping("/api/schedules/{scheduleId}/comments")
     public List<CommentResponse> findByScheduleId(@PathVariable Long scheduleId){
 
         return commentService.findByScheduleId(scheduleId);
@@ -34,7 +33,7 @@ public class CommentController {
     }
 
     //수정
-    @PutMapping("/{id}")
+    @PutMapping("/api/comments/{id}")
     public CommentResponse update(
             @Valid
             @PathVariable Long id,
@@ -44,7 +43,7 @@ public class CommentController {
     }
 
     //삭제
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/comments/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(
             @PathVariable Long id
