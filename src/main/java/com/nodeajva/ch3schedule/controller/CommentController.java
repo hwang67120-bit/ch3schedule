@@ -2,6 +2,7 @@ package com.nodeajva.ch3schedule.controller;
 
 import com.nodeajva.ch3schedule.dto.request.CommentRequest;
 import com.nodeajva.ch3schedule.dto.response.CommentResponse;
+import com.nodeajva.ch3schedule.dto.response.DeleteRespoinse;
 import com.nodeajva.ch3schedule.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -45,9 +46,11 @@ public class CommentController {
     //삭제
     @DeleteMapping("/api/comments/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(
+    public DeleteRespoinse delete(
             @PathVariable Long id
     ){
         commentService.delete(id);
+
+        return new DeleteRespoinse("댓글 삭제 완료");
     }
 }
