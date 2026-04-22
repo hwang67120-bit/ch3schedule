@@ -11,7 +11,9 @@ public record CommentResponse(
         Long scheduleId,
         String scheduleTitle,
         Long userId,
-        String userName
+        String userName,
+        LocalDateTime craeatedAt,
+        LocalDateTime updatedAt
 
 ) {
 
@@ -23,7 +25,9 @@ public record CommentResponse(
                 comment.getSchedule().getId(),
                 comment.getSchedule().getTitle(),
                 comment.getUser().getId(),
-                comment.getUser().getUserName()
+                comment.getUser().getUserName(),
+                comment.getCreatedAt(),
+                comment.getUpdatedAt()
 
         );
     }

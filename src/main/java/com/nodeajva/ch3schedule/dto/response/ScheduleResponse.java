@@ -11,7 +11,9 @@ public record ScheduleResponse(
         String title,
         String content,
         Long userId,
-        String userName
+        String userName,
+        LocalDateTime craeatedAt,
+        LocalDateTime updatedAt
 
 
 ) {
@@ -22,7 +24,9 @@ public record ScheduleResponse(
                 schedule.getTitle(),
                 schedule.getContent(),
                 schedule.getUser().getId(),
-                schedule.getUser().getUserName()
+                schedule.getUser().getUserName(),
+                schedule.getCreatedAt(),
+                schedule.getUpdatedAt()
         );
 
     }
