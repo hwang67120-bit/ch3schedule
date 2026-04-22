@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,7 +107,8 @@ public class ScheduleService {
      * @return 최신순으로 정렬된 일정 목록
      */
     public List<ScheduleResponse> findRecent() {
-        List<Schedule> schedules = scheduleRepository.findAllByOrderByCreatedAtDesc();
+
+        List<Schedule> schedules = scheduleRepository.findRecent();
 
         List<ScheduleResponse> responses = new ArrayList<>();
         for (Schedule schedule : schedules) {
