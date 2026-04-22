@@ -32,26 +32,20 @@ public class UserService {
     @Transactional
     public SignupResponse signup(SignupRequest request){
 
-
-
         if (userRepository.findByLoginId(request.loginId()).isPresent()) {
             throw new DuplicateLoginIdException();
         }
 
-
-
         String encodedPassword = passwordEncoder.encode(request.password());
 
-        User user = new User(
+        User newuser = new User(
                 request.loginId(),
                 encodedPassword,
                 request.userName(),
                 request.email()
         );
 
-        User saved = userRepository.save(user);
-
-        return SignupResponse.from(saved);
+        return SignupResponse.from(userRepository.save(newuser));
     }
 
     /**
@@ -64,15 +58,15 @@ public class UserService {
      * @throws InvalidPasswordException 로그인 실패 시 (사용자 없음 또는 비밀번호 불일치)
      */
     @Transactional
-    public LoginResponse login(LoginRequest login ){
+    public LoginResponse login(LoginRequest request ){
 
-        User user = userRepository.findByLoginId(login.loginId())
-                .orElseThrow(() -> new InvalidPasswordException());
+        User loginUser = userRepository.getByLoginId(request.loginId());
 
-        if (!passwordEncoder.matches(login.password(), user.getPassword())) {
+        if (!passwordEncoder.matches(request.password(), loginUser.getPassword())) {
             throw new InvalidPasswordException();
         }
-        return LoginResponse.from(user);
+        return LoginResponse.from(loginUser);
 
     }
+
 }
