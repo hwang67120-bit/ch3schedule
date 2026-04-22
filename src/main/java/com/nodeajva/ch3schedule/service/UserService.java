@@ -60,7 +60,7 @@ public class UserService {
     @Transactional
     public LoginResponse login(LoginRequest request ){
 
-        User loginUser = userRepository.getByLoginId(request.loginId());
+        User loginUser = userRepository.loadByLoginId(request.loginId());
 
         if (!passwordEncoder.matches(request.password(), loginUser.getPassword())) {
             throw new InvalidPasswordException();

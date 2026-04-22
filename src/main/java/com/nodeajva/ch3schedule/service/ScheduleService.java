@@ -43,21 +43,15 @@ public class ScheduleService {
     @Transactional
     public ScheduleResponse save(ScheduleRequest request){
 
-        User user = userRepository.findById(request.userId())
-                .orElseThrow(() -> new UserNotFoundException());
+        User author = userRepository.load(request.userId());
 
-        Schedule schedule = new Schedule(
+        Schedule newSchedule = new Schedule(
                 request.title(),
                 request.content(),
-                user
+                author
 
         );
-        Schedule saved = scheduleRepository.save(schedule);
-
-
-        ScheduleResponse response = ScheduleResponse.from(saved);
-
-        return response;
+        return ScheduleResponse.from(scheduleRepository.save(newSchedule));
     }
 
     /**
@@ -69,9 +63,7 @@ public class ScheduleService {
      * @throws ScheduleNotFoundException 존재하지 않는 일정인 경우
      */
     public ScheduleResponse findById(Long id){
-        Schedule schedules = scheduleRepository.findById(id)
-                .orElseThrow(() -> new ScheduleNotFoundException());
-
+        Schedule schedules = scheduleRepository.load(id);
         return ScheduleResponse.from(schedules);
     }
 
@@ -157,19 +149,12 @@ public class ScheduleService {
      */
     @Transactional
     public ScheduleResponse update(Long id, ScheduleUpdateRequest request){
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(()->new ScheduleNotFoundException());
+        Schedule schedule = scheduleRepository.load(id);
 
         schedule.update(
-                request.title(),
-                request.content()
+                request.title(), request.content());
 
-        );
-
-        Schedule saved = scheduleRepository.save(schedule);
-
-
-        return ScheduleResponse.from(saved);
+        return ScheduleResponse.from(schedule);
     }
 
     /**
@@ -181,11 +166,9 @@ public class ScheduleService {
      */
     @Transactional
     public void delete(Long id) {
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(() -> new ScheduleNotFoundException());
+        Schedule schedule = scheduleRepository.load(id);
 
         commentRepository.deleteByScheduleId(id);
-
         scheduleRepository.delete(schedule);
     }
 }
