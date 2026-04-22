@@ -5,17 +5,14 @@ import com.nodeajva.ch3schedule.entity.User;
 
 import lombok.Builder;
 
-import java.time.LocalDateTime;
 
 @Builder
-public class SignupResponse{
+public record SignupResponse(
 
-    private Long id;
-    private String loginId;
-    private String userName;
-    private String email;
-
-
+        Long id,
+        String loginId,
+        String userName,
+        String email) {
 
     public static SignupResponse from(User user) {
         return SignupResponse.builder()
