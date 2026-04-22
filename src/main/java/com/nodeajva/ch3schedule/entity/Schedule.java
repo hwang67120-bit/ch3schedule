@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "schedules")
 @Getter
 @NoArgsConstructor
-public class Schedule {
+public class Schedule extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

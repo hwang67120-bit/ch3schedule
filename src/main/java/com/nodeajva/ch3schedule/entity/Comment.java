@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 @Getter
 @NoArgsConstructor
-public class Comment {
+public class Comment extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
