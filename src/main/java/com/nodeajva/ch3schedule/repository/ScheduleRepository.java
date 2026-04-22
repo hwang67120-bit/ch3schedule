@@ -16,7 +16,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<Schedule> findByUserId(Long userid);
 
-    default Schedule getById(Long id) {
+    default Schedule load(Long id) {
         return findById(id).orElseThrow(ScheduleNotFoundException::new);
     }
 }
