@@ -1,8 +1,6 @@
 package com.nodeajva.ch3schedule.dto.response;
 
 import com.nodeajva.ch3schedule.entity.User;
-
-
 import lombok.Builder;
 
 
