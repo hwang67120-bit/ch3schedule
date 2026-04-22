@@ -160,8 +160,6 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(()->new ScheduleNotFoundException());
 
-
-
         schedule.update(
                 request.title(),
                 request.content()
