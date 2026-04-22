@@ -1,11 +1,11 @@
 package com.nodeajva.ch3schedule.service;
 
-import com.nodeajva.ch3schedule.entity.User;
 import com.nodeajva.ch3schedule.config.PasswordEncoder;
 import com.nodeajva.ch3schedule.dto.request.LoginRequest;
 import com.nodeajva.ch3schedule.dto.request.SignupRequest;
 import com.nodeajva.ch3schedule.dto.response.LoginResponse;
 import com.nodeajva.ch3schedule.dto.response.SignupResponse;
+import com.nodeajva.ch3schedule.entity.User;
 import com.nodeajva.ch3schedule.exception.DuplicateLoginIdException;
 import com.nodeajva.ch3schedule.exception.InvalidPasswordException;
 import com.nodeajva.ch3schedule.repository.UserRepository;
@@ -30,7 +30,7 @@ public class UserService {
      * @throws DuplicateLoginIdException 이미 존재하는 로그인 ID인 경우
      */
     @Transactional
-    public SignupResponse signup(SignupRequest request){
+    public SignupResponse signup(SignupRequest request) {
 
         if (userRepository.findByLoginId(request.loginId()).isPresent()) {
             throw new DuplicateLoginIdException();
@@ -38,12 +38,7 @@ public class UserService {
 
         String encodedPassword = passwordEncoder.encode(request.password());
 
-        User newuser = new User(
-                request.loginId(),
-                encodedPassword,
-                request.userName(),
-                request.email()
-        );
+        User newuser = new User(request.loginId(), encodedPassword, request.userName(), request.email());
 
         return SignupResponse.from(userRepository.save(newuser));
     }
@@ -58,7 +53,7 @@ public class UserService {
      * @throws InvalidPasswordException 로그인 실패 시 (사용자 없음 또는 비밀번호 불일치)
      */
     @Transactional
-    public LoginResponse login(LoginRequest request ){
+    public LoginResponse login(LoginRequest request) {
 
         User loginUser = userRepository.loadByLoginId(request.loginId());
 
