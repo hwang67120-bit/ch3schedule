@@ -8,6 +8,7 @@ import com.nodeajva.ch3schedule.dto.request.ScheduleUpdateRequest;
 import com.nodeajva.ch3schedule.dto.response.ScheduleResponse;
 import com.nodeajva.ch3schedule.exception.ScheduleNotFoundException;
 import com.nodeajva.ch3schedule.exception.UserNotFoundException;
+import com.nodeajva.ch3schedule.repository.CommentRepository;
 import com.nodeajva.ch3schedule.repository.ScheduleRepository;
 import com.nodeajva.ch3schedule.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,7 @@ public class ScheduleService {
 
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
-
+    private final CommentRepository commentRepository;
 
 
     //등록
@@ -138,6 +139,8 @@ public class ScheduleService {
     public void delete(Long id) {
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new ScheduleNotFoundException());
+
+        commentRepository.deleteByScheduleId(id);
 
         scheduleRepository.delete(schedule);
     }
