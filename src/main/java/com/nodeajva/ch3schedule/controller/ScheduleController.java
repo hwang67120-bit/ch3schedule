@@ -2,7 +2,6 @@ package com.nodeajva.ch3schedule.controller;
 
 import com.nodeajva.ch3schedule.dto.request.ScheduleRequest;
 import com.nodeajva.ch3schedule.dto.request.ScheduleUpdateRequest;
-import com.nodeajva.ch3schedule.dto.response.DeleteRespoinse;
 import com.nodeajva.ch3schedule.dto.response.ScheduleResponse;
 import com.nodeajva.ch3schedule.service.ScheduleService;
 import jakarta.validation.Valid;
@@ -75,9 +74,9 @@ public class ScheduleController {
     //삭제
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public DeleteRespoinse delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id){
         scheduleService.delete(id);
 
-        return new DeleteRespoinse("일정 삭제 완료");
+
     }
 }
