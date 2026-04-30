@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @Table(name = "schedule")
@@ -23,15 +24,21 @@ public class Schedule extends BaseEntity {
 	private Long id;
 
 	@Column(nullable = false)
+	@NonNull
 	private String title;
 
+	@NonNull
 	private String content;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	public Schedule(String title, String content, User user) {
+	public Schedule(
+		String title,
+		String content,
+		User user) {
+
 		this.title = title;
 		this.content = content;
 		this.user = user;

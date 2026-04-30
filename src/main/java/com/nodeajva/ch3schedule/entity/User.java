@@ -32,6 +32,7 @@ public class User extends BaseEntity {
 	private String email;
 
 	// 생성자
+
 	public User(String loginId, String password, String userName, String email) {
 		this.loginId = loginId;
 		this.password = password;
