@@ -1,4 +1,4 @@
-package com.nodeajva.ch3schedule.dto.response;
+package com.nodeajva.ch3schedule.exception;
 
 public record ErrorResponse(
         String message
