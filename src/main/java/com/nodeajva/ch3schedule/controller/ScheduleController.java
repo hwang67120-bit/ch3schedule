@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
 @RestController
@@ -29,7 +28,7 @@ public class ScheduleController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ScheduleResponse save(@Valid @RequestBody ScheduleRequest request){
+    public ScheduleResponse save(@Valid @RequestBody ScheduleRequest request) {
 
         return scheduleService.save(request);
     }
@@ -41,7 +40,7 @@ public class ScheduleController {
      * @return 일정 정보
      */
     @GetMapping("/{id}")
-    public ScheduleResponse findById (@PathVariable Long id){
+    public ScheduleResponse findById(@PathVariable Long id) {
         return scheduleService.findById(id);
     }
 
@@ -51,7 +50,7 @@ public class ScheduleController {
      * @return 일정 목록
      */
     @GetMapping
-    public List<ScheduleResponse> findAll(){
+    public List<ScheduleResponse> findAll() {
 
         return scheduleService.findAll();
     }
@@ -92,7 +91,7 @@ public class ScheduleController {
     /**
      * 일정 수정 API
      *
-     * @param id 일정 ID
+     * @param id      일정 ID
      * @param request 일정 수정 요청 (title, content)
      * @return 수정된 일정 정보
      */
@@ -100,8 +99,8 @@ public class ScheduleController {
     public ScheduleResponse update(
             @Valid
             @PathVariable Long id,
-            @RequestBody ScheduleUpdateRequest request){
-        return scheduleService.update(id,request);
+            @RequestBody ScheduleUpdateRequest request) {
+        return scheduleService.update(id, request);
     }
 
     /**
@@ -111,7 +110,7 @@ public class ScheduleController {
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         scheduleService.delete(id);
 
 

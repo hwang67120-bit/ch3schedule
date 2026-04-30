@@ -22,9 +22,10 @@ public class UserController {
      *
      * @param request 회원가입 요청 (loginId, password, userName, email)
      * @return 생성된 사용자 정보
-     */    @PostMapping("/signup")
+     */
+    @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    public SignupResponse signup(@Valid @RequestBody SignupRequest request){
+    public SignupResponse signup(@Valid @RequestBody SignupRequest request) {
 
         return userService.signup(request);
     }
@@ -36,7 +37,7 @@ public class UserController {
      * @return 로그인 응답 (userId, loginId, userName)
      */
     @PostMapping("/login")
-    public LoginResponse login(@Valid @RequestBody LoginRequest request){
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
 
         return userService.login(request);
     }
