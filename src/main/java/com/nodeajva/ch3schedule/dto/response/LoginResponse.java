@@ -1,8 +1,7 @@
 package com.nodeajva.ch3schedule.dto.response;
 
 
-import com.nodeajva.ch3schedule.Entity.User;
-import lombok.Builder;
+import com.nodeajva.ch3schedule.entity.User;
 
 
 public record LoginResponse(

@@ -1,13 +1,9 @@
 package com.nodeajva.ch3schedule.exception;
 
-public class ScheduleNotFoundException  extends RuntimeException{
+public class ScheduleNotFoundException extends RuntimeException {
 
-    public ScheduleNotFoundException(){
-        super("일정을 찾을 수 없습니다.");
-    }
-
-    public ScheduleNotFoundException(String message){
-        super(message);
-    }
+	public ScheduleNotFoundException() {
+		super("일정을 찾을 수 없습니다.");
+	}
 
 }
